@@ -1,3 +1,5 @@
+import java.util.Collection;
+
 /**
  * Created by rawjyot on 1/27/17.
  */
@@ -18,42 +20,88 @@ public class LinkedList {
         }
 
     }
-    public void create(int data)
+    public void addAtFront(int data)
     {
-        Node n=new Node(data);
 
+        Node n=new Node(data);
 
         if(Head==null)
         {
             Head=n;
+        }
+        else {
 
+            n.next = Head;
+            Head = n;
         }
 
-         Node temp=Head;
+    }
 
-         while(temp.next!=null)
-         {
-              temp=temp.next;
-         }
 
-         temp.next=n;
-         //n=temp;
-        System.out.println("Done"+temp.data);
+    public  void addAtLast(int data) {
+
+      Node n=new Node(data);
+      Node current=null;
+        int count = 0;
+        if (Head == null) {
+            Head =n;
+            current=n;
+        }
+        else {
+
+             Node temp=Head;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+
+            temp.next = n;
+        }
+
+
+
 
 
 
     }
+
     public void display()
     {
 
-         while(Head!=null)
-         {
-             System.out.print("NODE - > " + Head.data);
+        Node next=Head;
 
-             Head=Head.next;
+         while(next!=null)
+         {
+
+             System.out.print("NODE - > " + next.data);
+             System.out.print("\t");
+
+             next=next.next;
 
          }
 
+
+
+    }
+
+
+    public void addAtMiddele(int data,int position)
+    {
+
+        Node node=new Node(data);
+
+
+        Node temp=Head;
+        Node prev=Head;
+        int i=0;
+        while(i<position-1)
+        {
+            prev=temp;
+
+            temp=temp.next;
+             i++;
+        }
+        prev.next=node;
+        node.next=temp;
 
 
     }
@@ -62,21 +110,22 @@ public class LinkedList {
 
         LinkedList newlist=new LinkedList();
 
-        newlist.create(5);
-        newlist.create(6);
-        newlist.create(7);
-        newlist.create(8);
-        newlist.create(9);
+        newlist.addAtLast(2);
+        newlist.addAtLast(3);
+        newlist.addAtLast(4);
+        newlist.addAtLast(5);
+        newlist.addAtLast(6);
+
+        newlist.addAtFront(4);
+        newlist.addAtMiddele(7,3);
+
+
+
+
+
         newlist.display();
 
+
+
     }
-
-
-
-
-
-
-
-
-
 }
