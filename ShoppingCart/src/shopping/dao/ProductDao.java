@@ -10,7 +10,7 @@ import java.util.List;
 public interface ProductDao {
 
 public List<Product> getProductDetails();
-public void addProduct();
+public void addProduct(Product product);
 public void deleteProduct();
 public void updateProduct();
 public void editProductCode();
