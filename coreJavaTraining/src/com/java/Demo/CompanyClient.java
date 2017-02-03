@@ -1,6 +1,7 @@
 package com.java.Demo;
 
 import java.util.ArrayList;
+import java.util.FormatFlagsConversionMismatchException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -11,57 +12,47 @@ import java.util.List;
 public class CompanyClient {
 
 
+
+
+
+
     public static void main(String[] args) {
 
 
+
+//Adding Departments Through Comapny Object into Department List <Departments>
+
      Company user1 = new Company("Appdirect",80000);
-      List<Department> departments=new ArrayList<>();
+        List<Department> departments=new ArrayList<>();
+        user1.addDepartemnt(123,"Hr");
+        user1.addDepartemnt(234,"Admin");
+        user1.addDepartemnt(456,"Finance");
+        user1.addDepartemnt(789,"It");
+        user1.setDepartmentList(departments);
 
 
 
-/*
+//Adding Departments through Department Object into Department List <Departments>
+
      Department department=new Department();
      department.setDep_id(10);
      department.setDeptname("HR");
-
 
      Department department1=new Department();
      department1.setDep_id(12);
      department1.setDeptname("Admin");
 
-
      Department department2=new Department();
      department2.setDep_id(14);
      department2.setDeptname("Finance");
-
 
      departments.add(department);
      departments.add(department1);
      departments.add(department2);
 
-     */
+//Iterating Departments through Department List through <ADVANCE FOR LOOP OR FOR-EACH LOOP >.
 
-
-
-        user1.addDepartemnt(123,"Hr");
-        user1.addDepartemnt(234,"Admin");
-        user1.addDepartemnt(456,"Finance");
-        user1.addDepartemnt(789,"It");
-
-
-
-
-
-
-
-
-
-
-
-
-        user1.setDepartmentList(departments);
-
-      /*  for (Department values:departments)
+       for (Department values:departments)
         {
             System.out.println("Department");
             System.out.println("*******************************");
@@ -69,12 +60,12 @@ public class CompanyClient {
             System.out.print(values.getDep_id() +"\t\t\t\t");
             System.out.println(values.getDeptname());
             System.out.println("*******************************");
-        }*/
+        }
 
 
+//Adding Projects into ProjectList through Static Method <addProject>
 
         List<Project> projectList=new ArrayList<>();
-
         Project project=Project.addProject(12,"P305");
         Project project1=Project.addProject(14,"P307");
         Project project2=Project.addProject(16,"P308");
@@ -84,12 +75,23 @@ public class CompanyClient {
         projectList.add(project2);
         projectList.add(project3);
 
+//Iteration of Project with <FOR LOOP>
+        for(int i=0;i<projectList.size();i++)
+        {
+            System.out.println(projectList.get(i).getPro_code());
+            System.out.println(projectList.get(i).getPro_id());
+
+
+        }
+
+//Setting Project List into Department Class.
 
         Department depar_name=new Department();
         depar_name.setProjectList(projectList);
 
+//Iterating Projects through ITERATOR  Project List.
 
-       /* for (Project values: projectList)
+        for (Project values: projectList)
         {
             System.out.println("Project");
             System.out.println("*******************************");
@@ -97,15 +99,14 @@ public class CompanyClient {
             System.out.print(values.getPro_id() + "\t\t\t");
             System.out.println(values.getPro_code());
             System.out.println("*******************************");
-        }*/
+        }
 
 
 
 
 
-
+//Creating Employee List
         List<Employee> employeeList=new ArrayList<>();
-
 
         Employee employee=Employee.addEmployee("Rawjyot",101,1500000.00,23);
         Employee employee1=Employee.addEmployee("Arsdeep",102,1500000.00,21);
@@ -116,8 +117,27 @@ public class CompanyClient {
         employeeList.add(employee2);
         employeeList.add(employee3);
 
-        Iterator<Employee> iterator= employeeList.iterator();
 
+//Iterating through <WHILE LOOP>
+
+
+        int i=0;
+
+        while(i<employeeList.size())
+        {
+
+            System.out.println(employeeList.get(i).getEmp_Name());
+            System.out.println(employeeList.get(i).getAge());
+            System.out.println(employeeList.get(i).getEmp_Id());
+            System.out.println(employeeList.get(i).getSalary());
+            i++;
+        }
+
+
+
+//Iterating Employee List Through   <Iterator>
+
+        Iterator<Employee> iterator= employeeList.iterator();
         while (iterator.hasNext())
         {
             Employee elements=iterator.next();
@@ -129,60 +149,34 @@ public class CompanyClient {
 
         }
 
+
+//Setting EmployeeList into Project Class.
+
          Project project_details=new Project();
          project_details.setEmployeeList(employeeList);
 
 
+//Iterating Department List nested Iterator for Project again nested Iterator for Employee
 
 
+        for (Department values: departments) {
 
-        /*for (Employee values:employeeList
-             ) {
-            System.out.println("Employee Data");
-            System.out.println("*******************************");
-            System.out.println("Employee - Id:"+values.getEmp_Id()+"   Employee-Name:"+values.getEmp_Name()+"   Employee-Salary:"+values.getSalary()+"   Employee-Age:"+values.getAge());
-            System.out.println("*******************************");
-
-
-        }*/
-       // Company user2=new Company();
-
-      /*  for (Department values: departments)
-        {
-
-            System.out.print(values.getDep_id() +" - > ");
+            System.out.print(values.getDep_id() + " - > ");
             System.out.println(values.getDeptname());
 
-            for (Project values1 : projectList)
-            {
-                System.out.print(values1.getPro_id() +" - > ");
+            for (Project values1 : projectList) {
+                System.out.print(values1.getPro_id() + " - > ");
                 System.out.println(values1.getPro_code());
             }
 
-             for(Employee values2 : employeeList)
-             {
+            for (Employee values2 : employeeList) {
 
-                 System.out.print(values2.getEmp_Id() +" - > ");
-                 System.out.print(values2.getEmp_Name() + "- >");
-                 System.out.print(values2.getAge() +" - > ");
-                 System.out.print(values2.getSalary() + "->");
+                System.out.print(values2.getEmp_Id() + " - > ");
+                System.out.print(values2.getEmp_Name() + "- >");
+                System.out.print(values2.getAge() + " - > ");
+                System.out.print(values2.getSalary() + "->");
 
-             }*/
-
-
-
-
-
-         for (Department department: user1.getDepartmentList())
-         {
-
-
-             System.out.println(department.getDeptname());
-             System.out.println(department.getDep_id());
-
-
-
-         }
+            }
 
 
 
@@ -193,6 +187,11 @@ public class CompanyClient {
 
 
     }
+}
+
+
+
+
 
 
 
