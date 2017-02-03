@@ -2,6 +2,7 @@ package shopping.service;
 
 import shopping.domain.User;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -11,9 +12,9 @@ public interface UserServices {
 
 
     public List<User> getAllUsers();
-     public void addUser(User user);
-    public void deleteUser();
-    public void UpdateUser();
+     public void addUser(File file);
+    public void deleteUser(int id);
+    public void UpdateUser(int id,User user);
 
 
 }

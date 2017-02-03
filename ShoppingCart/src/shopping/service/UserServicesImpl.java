@@ -3,6 +3,7 @@ package shopping.service;
 import shopping.dao.UserDaoImpl;
 import shopping.domain.User;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,18 @@ import java.util.List;
  */
 public class UserServicesImpl implements UserServices {
 
+
+    static UserDaoImpl userDao;
+
+    static {
+        if(userDao == null) {
+            try {
+                userDao = new UserDaoImpl();
+            } catch (SQLException ex) {
+                //TODO
+            }
+        }
+    }
 
     @Override
     public List<User> getAllUsers() {
@@ -36,26 +49,36 @@ public class UserServicesImpl implements UserServices {
     }
 
     @Override
-    public void addUser(User user) {
+    public void addUser(File file) {
 
-        try {
-            UserDaoImpl userDaoimpl=new UserDaoImpl();
-            userDaoimpl.addUser(user);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+            userDao.addUser(file);
+
+
 
 
     }
 
     @Override
-    public void deleteUser() {
+    public void deleteUser(int id) {
 
+
+
+        userDao.deleteUser(id);
+       // try {
+            //UserDaoImpl userDao=new UserDaoImpl();
+            userDao.deleteUser(id);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
-    public void UpdateUser() {
+    public void UpdateUser(int id,User user) {
+
+
+        userDao.UpdateUser(id,user);
 
     }
 }

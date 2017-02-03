@@ -2,6 +2,7 @@ package shopping.service;
 
 import shopping.domain.Product;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -11,9 +12,8 @@ public interface ProductServices {
 
     public List<Product> getProductDetails();
     public void addProduct(Product product);
-    public void deleteProduct();
-    public void updateProduct();
-    public void editProductCode();
-
+    public void addProduct(File file);
+    public void deleteProduct(int id);
+    public void updateProduct(int id,Product product);
 
 }

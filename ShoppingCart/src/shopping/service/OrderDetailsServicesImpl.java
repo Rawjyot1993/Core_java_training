@@ -1,7 +1,13 @@
 package shopping.service;
 
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
+import shopping.dao.OrderDaoImpl;
+import shopping.dao.OrderDetailDao;
+import shopping.dao.OrderDetailImpl;
 import shopping.domain.OrderDetails;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,9 +16,29 @@ import java.util.List;
 public class OrderDetailsServicesImpl  implements  OrderDetailsServices{
 
 
+    static OrderDetailImpl orderDao;
+    static {
+
+        orderDao=new OrderDetailImpl() ;
+
+    }
+
     @Override
-    public List<OrderDetails> getAllOrderDetails() {
-        return null;
+    public List<OrderDetails> getAllOrderDetails(int id) {
+
+        List<OrderDetails> orderDetailss=new ArrayList<>();
+        orderDetailss=orderDao.getAllOrderDetails(id);
+
+
+
+     return orderDetailss;
+    }
+
+    @Override
+    public void addOrderDetails(File file) {
+
+        orderDao.addOrderDetails(file);
+
     }
 
     @Override
