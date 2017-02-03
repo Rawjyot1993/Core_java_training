@@ -1,0 +1,4 @@
+Watch,P204,12.00,50
+Camera,P200,300,30
+Laptop,L900,20000,20
+Glasses,G300,200,90
