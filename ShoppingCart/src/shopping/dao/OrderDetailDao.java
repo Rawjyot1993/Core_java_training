@@ -13,6 +13,6 @@ public interface OrderDetailDao {
     public List<OrderDetails> getAllOrderDetails(int id);
     public void deleteOrderDeails();
     public void addOrderDetails(File file);
-    public void updateOrderDeatils();
+    public void updateOrderDeatils(int id,OrderDetails orderDetails);
 
 }

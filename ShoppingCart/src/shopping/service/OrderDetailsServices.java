@@ -12,6 +12,6 @@ public interface OrderDetailsServices {
     public List<OrderDetails> getAllOrderDetails(int id);
     public void addOrderDetails(File file);
     public void deleteOrderDeails();
-    public void updateOrderDeatils();
+    public void updateOrderDeatils(int id,OrderDetails orderDetails);
 
 }

@@ -69,10 +69,15 @@ public class OrderDetailImpl implements OrderDetailDao{
             ResultSet resultSet;
             resultSet=stm.executeQuery(sql1);
             while (resultSet.next()) {
+
                 orderDetails.setAmount(resultSet.getDouble("amount"));
                 orderDetails.setPrise(resultSet.getDouble("price"));
                 orderDetails.setQuantity(resultSet.getInt("quantity"));
                 orderDetails.setId(resultSet.getInt("order_detail_id"));
+                orderDetails.setOrderId(resultSet.getInt("order_id"));
+                orderDetails.setProductId(resultSet.getInt("product_id"));
+
+
 
                 orderDetailss.add(orderDetails);
 
@@ -151,7 +156,28 @@ return  orderDetailss;
     }
 
         @Override
-        public void updateOrderDeatils () {
+        public void updateOrderDeatils(int id,OrderDetails orderDetails) {
+
+
+            String sql ="update order_detail set quantity = ? , price = ? , amount = ? , order_id = ? , product_id= ? where order_detail_id = ? ";
+            PreparedStatement p=null;
+
+            try {
+                OrderDetails orderDetails1=new OrderDetails();
+
+                p=con.prepareStatement(sql);
+                p.setInt(1,orderDetails1.getQuantity());
+                p.setDouble(2,orderDetails1.getPrise());
+                p.setDouble(3,orderDetails1.getAmount());
+                p.setInt(4,orderDetails1.getOrderId());
+                p.setInt(5,orderDetails1.getProductId());
+                p.setInt(6,id);
+
+                p.executeUpdate();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
         }
 

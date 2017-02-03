@@ -47,7 +47,10 @@ public class OrderDetailsServicesImpl  implements  OrderDetailsServices{
     }
 
     @Override
-    public void updateOrderDeatils() {
+    public void updateOrderDeatils(int id,OrderDetails orderDetails) {
+
+        orderDao.updateOrderDeatils(id,orderDetails);
+
 
     }
 }
