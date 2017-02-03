@@ -7,6 +7,30 @@ public class LinkedList {
 
     Node Head;
 
+
+
+    public void middleElemet()
+    {
+
+        Node SlowPointer=Head;
+        Node FastPointer=Head;
+
+
+        while(FastPointer.next!=null)
+        {
+
+            SlowPointer=SlowPointer.next;
+            FastPointer=FastPointer.next.next;
+
+
+        }
+        System.out.println(" Middle Element is->"+SlowPointer.data);
+
+
+
+    }
+
+
     class Node
     {
         int data;
@@ -42,7 +66,8 @@ public class LinkedList {
 
       Node n=new Node(data);
       Node current=null;
-        int count = 0;
+
+
         if (Head == null) {
             Head =n;
             current=n;
@@ -106,6 +131,8 @@ public class LinkedList {
 
     }
 
+
+
     public static void main(String[] args) {
 
         LinkedList newlist=new LinkedList();
@@ -119,9 +146,7 @@ public class LinkedList {
         newlist.addAtFront(4);
         newlist.addAtMiddele(7,3);
 
-
-
-
+        newlist.middleElemet();
 
         newlist.display();
 
