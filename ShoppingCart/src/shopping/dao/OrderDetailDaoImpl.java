@@ -19,12 +19,12 @@ import java.util.List;
 /**
  * Created by rawjyot on 1/29/17.
  */
-public class OrderDetailImpl implements OrderDetailDao{
+public class OrderDetailDaoImpl implements OrderDetailDao{
 
     Connection con;
     Statement stm;
 
-    public OrderDetailImpl() {
+    public OrderDetailDaoImpl() {
         con = DBConnection.getConnection();
 
         try {
@@ -39,58 +39,44 @@ public class OrderDetailImpl implements OrderDetailDao{
     }
 
 
-
-
-
     @Override
     public List<OrderDetails> getAllOrderDetails(int id) {
 
       List<OrderDetails> orderDetailss=new ArrayList<>();
-      String sql="select * from order_detail where order_id=?";
-      String sql1="select * from order_detail";
 
-        OrderDetails orderDetails=new OrderDetails();
+      String sql="select * from order_detail where order_id = ? ";
+    //  String sql1="select * from order_detail";
+
+
+
         PreparedStatement preparedStatement= null;
 
+
         try {
+
             preparedStatement = con.prepareStatement(sql);
+
             preparedStatement.setInt(1,id);
-            preparedStatement.executeQuery();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            ResultSet resultSet=preparedStatement.executeQuery();
 
-
-
-
-
-        try {
-            ResultSet resultSet;
-            resultSet=stm.executeQuery(sql1);
-            while (resultSet.next()) {
-
+            while (resultSet.next())
+            {
+                OrderDetails orderDetails=new OrderDetails();
                 orderDetails.setAmount(resultSet.getDouble("amount"));
                 orderDetails.setPrise(resultSet.getDouble("price"));
                 orderDetails.setQuantity(resultSet.getInt("quantity"));
                 orderDetails.setId(resultSet.getInt("order_detail_id"));
                 orderDetails.setOrderId(resultSet.getInt("order_id"));
                 orderDetails.setProductId(resultSet.getInt("product_id"));
-
-
-
                 orderDetailss.add(orderDetails);
-
-
-
-
             }
 
-        } catch (SQLException e) {
+        }
+        catch (SQLException e)
+        {
             e.printStackTrace();
         }
-
-
 
 return  orderDetailss;
 

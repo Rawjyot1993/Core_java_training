@@ -1,13 +1,10 @@
 package shopping.service;
 
 import shopping.dao.OrderDaoImpl;
-import shopping.dao.OrderDetailImpl;
-import shopping.dao.UserDaoImpl;
 import shopping.domain.Order;
-import shopping.domain.OrderDetails;
 
 import java.io.File;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +23,12 @@ public class OrderServicesImpl implements OrderServices{
      int id;
     @Override
     public List<Order> getAllOrder() {
-        return null;
+
+        List<Order> orderList;
+        orderList=new ArrayList<>();
+        orderList=orderDao.getAllOrder();
+
+        return  orderList;
     }
 
     @Override

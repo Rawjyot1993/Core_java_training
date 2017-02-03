@@ -48,18 +48,21 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public List<Order> getAllOrder() {
 
-        ResultSet resultSet;
+
         List<Order> orders = new ArrayList<>();
 
         Order order = new Order();
 
         try {
+            ResultSet resultSet;
             resultSet = stm.executeQuery("select * from orders");
-            while (resultSet.next()) {
-                order.setOrderdate(resultSet.getDate("order_date"));
-                order.setAmount(resultSet.getDouble("amount"));
-                order.setUserId(resultSet.getInt("user_id"));
 
+
+                while (resultSet.next()) {
+                    order.setId(resultSet.getInt("order_id"));
+                    order.setUserId(resultSet.getInt("user_id"));
+
+                    orders.add(order);
 
             }
         } catch (Exception e) {
@@ -74,7 +77,7 @@ public class OrderDaoImpl implements OrderDao {
 
 
 
-        String sql="insert into orders(order_date,user_id) values (?,?,?) ";
+        String sql="insert into orders(order_date,user_id) values (?,?) ";
 
         File file1=file;
         FileReader fileReader = null;
@@ -100,7 +103,6 @@ public class OrderDaoImpl implements OrderDao {
 
             try {
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
-                System.out.println("Orders's  are Added  Successfully");
 
                // System.out.println(date);
 
@@ -116,12 +118,18 @@ public class OrderDaoImpl implements OrderDao {
 
             //    preparedStatement.setDate(1,);
              //   System.out.println(arr[0]);
+
+
+
+                preparedStatement.setString(1, arr[0]);
+                System.out.println(arr[0]);
                 preparedStatement.setString(2, arr[1]);
                 System.out.println(arr[1]);
-                preparedStatement.setString(3, arr[2]);
-                System.out.println(arr[2]);
 
                 preparedStatement.executeUpdate();
+
+                System.out.println("Orders's  are Added  Successfully");
+
 
             } catch (SQLException e) {
                 e.printStackTrace();
