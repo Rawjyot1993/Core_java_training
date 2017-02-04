@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Created by rawjyot on 1/27/17.
  */
@@ -86,14 +88,18 @@ public class Stack {
 
     public static void main(String[] args)  {
 
-
+        Scanner sc=new Scanner(System.in);
         Stack r= new Stack(5);
-       // r.push(2);
-       // r.push(3);
-       //  r.push(4);
-       //  r.push(5);
-       // r.push(6);
-        // r.push(7);
+        for(int i=0;i<5;i++)
+        {
+
+
+            r.push(i);
+
+        }
+
+
+
 
         try {
             r.pop();

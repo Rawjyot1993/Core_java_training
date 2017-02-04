@@ -8,7 +8,6 @@ public class LinkedList {
     Node Head;
 
 
-
     public void middleElemet()
     {
 
