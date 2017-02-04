@@ -1,5 +1,6 @@
 package shopping.dao;
 
+import shopping.domain.Product;
 import shopping.domain.User;
 import shopping.utils.DBConnection;
 
@@ -19,6 +20,8 @@ public class UserDaoImpl implements UserDao {
 
     Connection con;
     Statement stm;
+
+
     public UserDaoImpl() throws SQLException {
 
 
@@ -41,25 +44,22 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
 
-        ResultSet resultSet;
+
         List<User> users = new ArrayList<>();
-        User user =new User();
+
 
         try {
 
-               resultSet = stm.executeQuery("select * from users");
+            ResultSet resultSet;
 
-
-
-
-            while (resultSet.next()) {
-
-               user.setId(resultSet.getInt("user_id"));
+                resultSet = stm.executeQuery("select * from users");
+                while (resultSet.next()) {
+                    User user =new User();
+                user.setId(resultSet.getInt("user_id"));
                 user.setUserName(resultSet.getString("user_name"));
                 user.setFirstName(resultSet.getString("first_name"));
                 user.setLastName(resultSet.getString("lastname"));
                 user.setLocalAddress(resultSet.getString("address"));
-
                 users.add(user);
             }
         }
@@ -70,15 +70,12 @@ public class UserDaoImpl implements UserDao {
         }
 
 return  users;
+
+
     }
 
-    @Override
+   /* @Override
     public void addUser(File file) {
-
-
-
-
-
 
         String sql="Insert into users(user_name,first_name,lastname,address) "+" values(?,?,?,?)";
 
@@ -131,6 +128,7 @@ return  users;
 
 
     }
+*/
 
     public void addUser(User user) {
 
@@ -206,7 +204,7 @@ return  users;
     @Override
     public void UpdateUser(int id,User user) {
 
-        String sql ="update users set user_name = ? , first_name = ? , lastname = ? , address = ? , where user_id = ? ";
+        String sql ="update users set user_name = ? , first_name = ? , lastname = ? , address = ?  where user_id = ? ";
         PreparedStatement p=null;
 
         try {

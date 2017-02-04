@@ -25,9 +25,14 @@ public class OrderDetailClient {
     }
     public static void main(String[] args) {
 
-        List<OrderDetails> orderDetailss = new ArrayList<>();
-        orderDetailss = orderServices.getAllOrderDetails(1);
 
+//List to Extract OrderDetails through Order Id.
+
+        List<OrderDetails> orderDetailss = new ArrayList<>();
+
+
+
+        orderDetailss = orderServices.getAllOrderDetails(1);  //Here Order id as 1
         for (OrderDetails order: orderDetailss)
         {
 
@@ -38,24 +43,16 @@ public class OrderDetailClient {
 
         }
 
+//Creating CSV Files
 
-
-
-
-       File dir = new File("/Users/rawjyot/Projects/ShoppingCart/");
+        File dir = new File("/Users/rawjyot/Projects/ShoppingCart/");
         File f1 = new File(dir, "Amount_Details.csv");
-
-
-
 
         final String cs = ",";
         final String nls = "\n";
+
         final String fh = "Order_Id ,Order_Details_Id,Product_Id ,Quantity ,Price ,Amount ";
         FileWriter fw=null;
-
-
-
-
         try {
 
             try {
@@ -68,16 +65,9 @@ public class OrderDetailClient {
                 e.printStackTrace();
                 }
 
-
-
-
-
-
-
-               double Total=0.0;
+               double Total=0.0; //Setting Total Values
                 for (OrderDetails o : orderDetailss) {
-
-                    double sum = 0;
+                    double sum = 0;  //Setting amount value
                     try {
 
                         fw.append(nls);
@@ -93,16 +83,16 @@ public class OrderDetailClient {
                         fw.append(cs);
 
 
-                        Double x = o.getPrise();
-                        int q = o.getQuantity();
-                        sum = sum + (q * x);
+                        Double x = o.getPrise(); // Function to find out the amount.
+                        int q = o.getQuantity(); //
+                        sum = sum + (q * x);     // CALCULATING SUM THROUGH PRICE AND QUANTITY
 
 
                         fw.append(Double.toString(sum));
 
 
                         fw.flush();
-                        System.out.print(" Amount-> " + o.getAmount());
+                        System.out.print(" Amount-> " + o.getAmount());          //DISPLAYING RECORD ON CONSOLE
                         System.out.print(" Order Detail ID-> " + o.getId());
                         System.out.print(" Price-> " + o.getPrise());
                         System.out.print(" Quantity-> " + o.getQuantity());
@@ -144,11 +134,24 @@ public class OrderDetailClient {
         }
         finally {
             try {
-                fw.close();
+                fw.close();  //RESOURCES CLOSED
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
+//Delete Order Details.
+
+     //   orderServices.deleteOrderDeails();
+
+//Update Order Details.
+
+     /*
+         OrderDetails orderDetails=new OrderDetails();
+        orderDetails.setQuantity(3);
+        orderDetails.setPrise(23);
+        orderServices.updateOrderDeatils(1,orderDetails);
+     */
 
         }
     }

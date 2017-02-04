@@ -13,6 +13,7 @@ public interface UserServices {
 
     public List<User> getAllUsers();
      public void addUser(File file);
+      public void addUser(User user);
     public void deleteUser(int id);
     public void UpdateUser(int id,User user);
 

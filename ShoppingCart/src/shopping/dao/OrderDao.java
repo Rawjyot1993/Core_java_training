@@ -12,7 +12,8 @@ import java.util.List;
  */
 public interface OrderDao {
  public List<Order> getAllOrder( );
- public void  addOrders(File file);
+ //public void  addOrders(File file);
+ public void  addOrders(Order order);
  public  void deleteOrder(int id);
  public  void updateOrder(int id,Order order);
 

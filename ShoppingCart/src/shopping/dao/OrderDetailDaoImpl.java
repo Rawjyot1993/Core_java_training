@@ -83,7 +83,48 @@ return  orderDetailss;
     }
 
     @Override
-    public void deleteOrderDeails() {
+    public void deleteOrderDeails(int id) {
+
+        String sql="Delete from order_detail where order_detail_id = ? ";
+
+
+        try {
+
+            //  stm.executeUpdate(sql);
+            PreparedStatement p= null;
+            p = con.prepareStatement(sql);
+            p.setInt(1,id);
+            p.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void addOrderDetails(OrderDetails orderDetails) {
+
+        String sql = "Insert into order_detail(quantity,price,amount,order_id,product_id) " + " values(?,?,?,?,?)";
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+            System.out.println("OrderDetail's  are Added  Successfully");
+
+            preparedStatement.setInt(1,orderDetails.getQuantity());
+            preparedStatement.setDouble(2,orderDetails.getPrise());
+            preparedStatement.setDouble(3,orderDetails.getAmount());
+            preparedStatement.setInt(4,orderDetails.getOrderId());
+            preparedStatement.setInt(5,orderDetails.getProductId());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+
 
     }
 
@@ -91,7 +132,7 @@ return  orderDetailss;
     public void addOrderDetails(File file) {
 
 
-        String sql = "Insert into order_detail(quantity,price,amount,order_id,product_id) " + " values(?,?,?,?,?)";
+        /*String sql = "Insert into order_detail(quantity,price,amount,order_id,product_id) " + " values(?,?,?,?,?)";
 
         File file1 = file;
         FileReader fileReader = null;
@@ -138,7 +179,7 @@ return  orderDetailss;
                 e.printStackTrace();
             }
 
-        }
+        }*/
     }
 
         @Override

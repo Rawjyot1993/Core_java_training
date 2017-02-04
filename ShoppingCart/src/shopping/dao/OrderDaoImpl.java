@@ -1,23 +1,13 @@
 package shopping.dao;
 
 import shopping.domain.Order;
-import shopping.domain.User;
 import shopping.utils.DBConnection;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +51,7 @@ public class OrderDaoImpl implements OrderDao {
                 while (resultSet.next()) {
                     order.setId(resultSet.getInt("order_id"));
                     order.setUserId(resultSet.getInt("user_id"));
+                    order.setOrderdate(resultSet.getDate("order_date"));
 
                     orders.add(order);
 
@@ -72,7 +63,7 @@ public class OrderDaoImpl implements OrderDao {
         return orders;
     }
 
-    @Override
+/*    @Override
     public void addOrders(File file) {
 
 
@@ -103,24 +94,6 @@ public class OrderDaoImpl implements OrderDao {
 
             try {
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
-
-               // System.out.println(date);
-
-               /* Date now;
-                now = new Date();
-                String pattern = "yyyy-MM-dd";
-                SimpleDateFormat formatter = new SimpleDateFormat(pattern);
-                String mysqlDateString = formatter.format(now);
-                System.out.println("Java's Default Date Format: " + now);
-                System.out.println("Mysql's Default Date Format: " + mysqlDateString);
-*/
-
-
-            //    preparedStatement.setDate(1,);
-             //   System.out.println(arr[0]);
-
-
-
                 preparedStatement.setString(1, arr[0]);
                 System.out.println(arr[0]);
                 preparedStatement.setString(2, arr[1]);
@@ -139,6 +112,33 @@ public class OrderDaoImpl implements OrderDao {
 
 
 
+    }*/
+
+    @Override
+    public void addOrders(Order order) {
+
+
+
+        String sql="insert into orders(order_date,user_id) values (?,?) ";
+
+        try {
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setDate(1,convertUtilToSql(order.getOrderdate()));
+           // System.out.println(arr[0]);
+            preparedStatement.setInt(2,order.getUserId());
+          //  System.out.println(arr[1]);
+
+            preparedStatement.executeUpdate();
+
+            System.out.println("Orders's  are Added  Successfully");
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 
     @Override
@@ -146,11 +146,7 @@ public class OrderDaoImpl implements OrderDao {
 
 
         String sql = "Delete from Order where order_id = ? ";
-
-
         try {
-
-            //  stm.executeUpdate(sql);
             PreparedStatement p = null;
             p = con.prepareStatement(sql);
             p.setInt(1, id);

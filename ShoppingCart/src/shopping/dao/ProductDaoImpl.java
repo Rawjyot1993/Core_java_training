@@ -48,7 +48,7 @@ public class ProductDaoImpl implements ProductDao {
 
         ResultSet resultSet;
         List<Product> products = new ArrayList<>();
-        Product product=new Product();
+
         try {
 
             resultSet = stm.executeQuery("select * from product");
@@ -56,7 +56,8 @@ public class ProductDaoImpl implements ProductDao {
 
             while (resultSet.next()) {
 
-
+                Product product=new Product();
+                product.setId(resultSet.getInt("product_id"));
                 product.setName(resultSet.getString("product_name"));
                 product.setCode(resultSet.getString("code"));
                 product.setPrice(resultSet.getDouble("price"));
@@ -74,33 +75,12 @@ public class ProductDaoImpl implements ProductDao {
         return  products;
     }
 
-    public  void  addProduct(File file)
+    /*public  void  addProduct(File file)
     {
 
 
         String sql="Insert into product(product_name,code,price,stock)"+" values(?,?,?,?)";
 
-        File file1=file;
-        FileReader fileReader = null;
-        try {
-            fileReader = new FileReader(file1);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        String string;
-        StringBuilder stringBuilder = new StringBuilder();
-        try {
-            while((string=bufferedReader.readLine())!=null){
-                stringBuilder.append(string).append("\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        string=stringBuilder.toString();
-        String[] string1 = string.split("\n");
-        for (String strings:string1) {
-            String[] arr = strings.split(",");
 
             try {
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
@@ -125,7 +105,7 @@ public class ProductDaoImpl implements ProductDao {
 
 
     }
-
+*/
     @Override
     public void addProduct( Product product) {
 
@@ -136,8 +116,8 @@ public class ProductDaoImpl implements ProductDao {
 
             preparedStatement.setString(1,product.getName());
             preparedStatement.setString(2,product.getCode());
-            preparedStatement.setString(3, String.valueOf(product.getPrice()));
-            preparedStatement.setString(4, String.valueOf(product.getStock()));
+            preparedStatement.setInt(3,product.getStock());
+            preparedStatement.setInt(4,product.getStock());
 
             preparedStatement.executeUpdate();
 
@@ -149,6 +129,12 @@ public class ProductDaoImpl implements ProductDao {
 
     }
 
+    @Override
+    public void addProduct(File file) {
+
+
+
+    }
 
 
     @Override

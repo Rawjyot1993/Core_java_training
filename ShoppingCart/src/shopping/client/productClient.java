@@ -14,14 +14,14 @@ import java.util.List;
 /**
  * Created by rawjyot on 2/1/17.
  */
-public class productClient {
+public class ProductClient {
 
-
+    static Product product;
     static ProductServicesImpl productDao;
 
     static {
         if(productDao== null) {
-
+            product=new Product();
             productDao = new ProductServicesImpl();
 
         }
@@ -31,35 +31,46 @@ public class productClient {
     public static void main(String[] args) {
 
 
-/*
+//POPULATING DATABASE THROUGH FILES
 
 
-
-
-       List<Product>products=new ArrayList<>();
-        product.setName("TV");
-        product.setCode("P201");
-        product.setPrice(12000.00);
-        product.setStock(1234);
-
-        Product product1=new Product();
-
-        List<Product>products1=new ArrayList<>();
-        product.setName("TV");
-        product.setCode("P201");
-        product.setPrice(12000.00);
-        product.setStock(1234);
-
-        Product product2=new Product();
-
-        */
         File file=new File("/Users/rawjyot/Projects/ShoppingCart/src/shopping/utils/DataBaseFileProducts.txt");
-        productDao.addProduct(file);
+
+       /*   productDao.addProduct(file);  */
+
+// To Iterate the list of Product
+
+      /*  List<Product> productList=new ArrayList<>();
+        productList=productDao.getProductDetails();
+        for(Product product1:productList)
+        {
+            System.out.println(product1.getId());
+            System.out.println(product1.getName());
+            System.out.println(product1.getStock());
+
+        }
+       */
+
+//Update the Product
+
+     /* Product product=new Product();
+      product.setName("Perfume");
+      product.setStock(12);
+      product.setPrice(200);
+      product.setCode("P201");
+      productDao.updateProduct(2,product);
+     */
+
+//Delete the Product
+
+     /* productDao.deleteProduct(7); */
 
 
 
 
     }
+
+
 
 
 

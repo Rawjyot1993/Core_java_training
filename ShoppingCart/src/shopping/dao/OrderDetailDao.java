@@ -11,7 +11,8 @@ import java.util.List;
 public interface OrderDetailDao {
 
     public List<OrderDetails> getAllOrderDetails(int id);
-    public void deleteOrderDeails();
+    public void deleteOrderDeails(int id);
+    public void addOrderDetails(OrderDetails orderDetails);
     public void addOrderDetails(File file);
     public void updateOrderDeatils(int id,OrderDetails orderDetails);
 

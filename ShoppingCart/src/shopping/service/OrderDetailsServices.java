@@ -11,7 +11,7 @@ import java.util.List;
 public interface OrderDetailsServices {
     public List<OrderDetails> getAllOrderDetails(int id);
     public void addOrderDetails(File file);
-    public void deleteOrderDeails();
+    public void deleteOrderDeails(int id);
     public void updateOrderDeatils(int id,OrderDetails orderDetails);
 
 }
