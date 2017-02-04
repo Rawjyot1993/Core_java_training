@@ -40,12 +40,13 @@ public class Queue {
             q.push(6);
             q.push(3);
             q.show();
-            System.out.println("Poped Element is ->" + q.pop());
-            q.push(3);
-            System.out.println("Poped Element is -> " + q.pop());
-            q.push(8);
-            System.out.println("Poped Element is ->" + q.pop());
-            q.push(0);
+           System.out.println("Poped Element is ->" + q.pop());
+           q.show();
+            //q.push(3);
+            //System.out.println("Poped Element is -> " + q.pop());
+            //q.push(8);
+            //System.out.println("Poped Element is ->" + q.pop());
+            //q.push(0);
 
         }
         catch(MasterException x)
@@ -86,6 +87,7 @@ public class Queue {
         }
 
         public int pop() throws MasterException {
+
             if (front == MaxSize-1 || front == -1)
             {
                 throw new MasterException("Queue UnderFlow");
@@ -93,9 +95,9 @@ public class Queue {
             else
                 {
 
-                int x = arr[front++];
+                int x = arr[rear--];
                 return x;
-                
+
             }
         }
 
