@@ -17,8 +17,52 @@ public class Queue {
 
 
 
+    public void deQueue() throws  MasterException{
 
-    int [] arr ;
+        int value;
+
+        if (isempty()) {
+            throw new MasterException("Queue is empty, cant dequeue");
+        }
+        else if (front == rear)
+        {
+            value = queue[front];
+            front = -1;
+            rear = -1;
+
+        }
+        else {
+            value = queue[front];
+            front=(front+1);
+
+        }
+
+        System.out.println(" Deleted "+ value);
+    }
+
+    int[] queue;
+
+
+    public boolean isempty() {
+        return (front == -1 && rear == -1);
+    }
+
+    public void enQueue(int value)throws  MasterException
+
+    {
+        if (isempty()) {
+            front++;
+            rear++;
+            queue[rear] = value;
+
+        }
+        else {
+            rear=(rear+1);
+            queue[rear] = value;
+
+        }
+    }
+
 
     int front = -1, rear = -1 , MaxSize;
 
@@ -35,18 +79,13 @@ public class Queue {
         Queue q = new Queue(MaxSize);
 
         try{
-            q.push(8);
-            q.push(9);
-            q.push(6);
-            q.push(3);
+           q.enQueue(5);
+            q.enQueue(6);
+            q.enQueue(7);
+            q.enQueue(8);
             q.show();
-           System.out.println("Poped Element is ->" + q.pop());
-           q.show();
-            //q.push(3);
-            //System.out.println("Poped Element is -> " + q.pop());
-            //q.push(8);
-            //System.out.println("Poped Element is ->" + q.pop());
-            //q.push(0);
+            q.deQueue();
+            q.show();
 
         }
         catch(MasterException x)
@@ -62,51 +101,21 @@ public class Queue {
 
         public  Queue(int MaxSize)
         {
-            arr = new int[MaxSize];
+
+            queue = new int[MaxSize];
             this.MaxSize = MaxSize;
-        }
-
-
-        public  void push(int data) throws MasterException {
-
-            if(rear==MaxSize)
-            {
-                throw new MasterException(" Queue Overflow");
-            }
-
-            else
-            {
-                if(front==-1)
-                {
-                    front=0;
-                }
-                rear++;
-                arr[rear]=data;
-            }
 
         }
 
-        public int pop() throws MasterException {
 
-            if (front == MaxSize-1 || front == -1)
-            {
-                throw new MasterException("Queue UnderFlow");
-            }
-            else
-                {
 
-                int x = arr[rear--];
-                return x;
-
-            }
-        }
 
         public void show()
         {
             System.out.println("List is");
             for(int i = front; i<=rear ; i++)
             {
-                System.out.println(arr[i]);
+                System.out.println(queue[i]);
             }
 
 
